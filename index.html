@@ -25,17 +25,17 @@
 
 .band { background: var(--band); color: var(--band-ink); }
 .band .wrap { padding-block: 56px; }
-.band .eyebrow { color: color-mix(in srgb, var(--band-ink) 65%, transparent); }
+.band .eyebrow { color: var(--muted); }
 .steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 28px; }
 @media (max-width: 760px) { .steps3 { grid-template-columns: minmax(0, 1fr); } }
-.steps3 .n { font-family: var(--mono); font-size: 12px; color: #6cc3ce; }
+.steps3 .n { font-family: var(--mono); font-size: 12px; color: var(--accent); }
 .steps3 h3 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 6px 0 6px; }
-.steps3 p { margin: 0; color: color-mix(in srgb, var(--band-ink) 75%, transparent); font-size: 14.5px; }
+.steps3 p { margin: 0; color: var(--muted); font-size: 14.5px; }
 
 .places .wrap { padding-block: 56px 0; }
 .place-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
 @media (max-width: 760px) { .place-grid { grid-template-columns: minmax(0, 1fr); } }
-.place { border-top: 2px solid var(--ink); padding-top: 14px; }
+.place { border-top: 2px solid var(--accent); padding-top: 14px; }
 .place h3 { font-family: var(--display); font-weight: 700; font-size: 19px; margin: 0 0 4px; }
 .place p { margin: 0; color: var(--muted); font-size: 14.5px; }
 

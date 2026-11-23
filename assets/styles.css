@@ -1,29 +1,21 @@
-/* Vetted — shared styles. Layout: one centered column (1040px) with section bands; forms use a sticky side rail on wide screens. */
+/* Vetted — shared styles. Light theme only. Layout: one centered column (1040px) with section bands; forms use a sticky side rail on wide screens. */
 :root {
-  --bg: #f3f5f3;
+  --bg: #fbfdfc;
   --surface: #ffffff;
-  --ink: #13201d;
-  --muted: #56645f;
-  --line: #d5dcd8;
-  --accent: #0d6672;
+  --ink: #1d2b28;
+  --muted: #5d6b66;
+  --line: #dfe6e3;
+  --accent: #0f7d89;
   --accent-ink: #ffffff;
-  --accent-soft: #e1eff0;
-  --band: #13201d;
-  --band-ink: #e6ece9;
+  --accent-soft: #e4f4f5;
+  --band: #eaf6f6;
+  --band-ink: #1d2b28;
   --ok: #1f7a4a;
   --warn: #9a5b00;
   --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1614; --surface: #17211e; --ink: #e6ece9; --muted: #9baba5; --line: #2b3834;
-    --accent: #4fb3bf; --accent-ink: #062226; --accent-soft: #163236;
-    --band: #0a0f0e; --band-ink: #e6ece9; --ok: #5cc98b; --warn: #e0a64a;
-    color-scheme: dark;
-  }
 }
 
 * { box-sizing: border-box; }
