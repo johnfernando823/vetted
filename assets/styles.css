@@ -1,15 +1,15 @@
 /* Vetted — shared styles. Light theme only. Layout: one centered column (1040px) with section bands; forms use a sticky side rail on wide screens. */
 :root {
-  --bg: #fbfdfc;
+  --bg: #fbfcfe;
   --surface: #ffffff;
-  --ink: #1d2b28;
-  --muted: #5d6b66;
-  --line: #dfe6e3;
-  --accent: #0f7d89;
+  --ink: #1a2433;
+  --muted: #5a6575;
+  --line: #e0e5ee;
+  --accent: #1f5fbf;
   --accent-ink: #ffffff;
-  --accent-soft: #e4f4f5;
-  --band: #eaf6f6;
-  --band-ink: #1d2b28;
+  --accent-soft: #e8f0fc;
+  --band: #eef3fb;
+  --band-ink: #1a2433;
   --ok: #1f7a4a;
   --warn: #9a5b00;
   --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
