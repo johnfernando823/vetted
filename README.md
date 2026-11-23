@@ -14,7 +14,19 @@ No client or coach data is stored in this repo. Applications go to the **Vetted 
 ## Setup
 
 ### 1. Put the site online (GitHub Pages)
-Repo **Settings → Pages → Build and deployment**: Source "Deploy from a branch", branch `main`, folder `/ (root)`. Save. The site appears at `https://<your-username>.github.io/vetted/` after a minute or two.
+Repo **Settings → Pages → Build and deployment**: Source "Deploy from a branch", branch `main`, folder `/ (root)`. Save. The site is served at **https://vettedtrain.com** (set by the `CNAME` file).
+
+DNS at the domain registrar:
+
+| Type | Host | Value |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | johnfernando823.github.io |
+
+Once DNS has spread, tick **Enforce HTTPS** on the Pages settings page.
 
 ### 2. Connect the application form to Google Sheets
 1. Open the **Vetted Coach Applications** sheet in Google Drive.
