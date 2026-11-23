@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coach with Vetted</title>
+<meta name="description" content="Apply to coach with Vetted. We match screened coaches with private clients at home, in building gyms, and at parks and beaches.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+main.wrap { padding-bottom: 0; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.err-send { color: var(--warn); font-size: 14px; }
+.preview-note code { font-family: var(--mono); font-size: 12.5px; }
+.intro { padding-block: 40px 28px; max-width: 640px; }
+.intro h1 { font-family: var(--display); font-weight: 800; font-stretch: 88%; font-size: clamp(34px, 6vw, 54px); line-height: 1; letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; }
+.intro p { color: var(--muted); font-size: 17px; margin: 0; max-width: 58ch; }
+
+.preview-note { display: flex; gap: 10px; align-items: flex-start; background: var(--accent-soft); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; margin-bottom: 28px; max-width: 640px; }
+.preview-note b { font-weight: 600; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } .rail { order: -1; } }
+
+form { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+fieldset { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 22px 22px 24px; margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+legend { display: contents; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; }
+.sec-num { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.sec-title { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 20px; margin: 0; }
+.sec-sub { color: var(--muted); font-size: 13.5px; margin: -10px 0 0; }
+
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 560px) { .row { grid-template-columns: minmax(0, 1fr); } }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+label.lbl, .lbl { font-weight: 600; font-size: 14px; }
+.opt { font-weight: 400; color: var(--muted); font-size: 12.5px; margin-left: 4px; }
+.hint { color: var(--muted); font-size: 12.5px; }
+input[type=text], input[type=email], input[type=tel], input[type=number], select, textarea {
+  font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; width: 100%;
+}
+textarea { min-height: 84px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, .chip input:focus-visible + span {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.invalid input, .invalid select, .invalid textarea { border-color: var(--warn); }
+.err { color: var(--warn); font-size: 12.5px; display: none; }
+.invalid .err { display: block; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-block; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13.5px; background: var(--bg); cursor: pointer; user-select: none; }
+.chip input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+.avail { overflow-x: auto; }
+.avail table { border-collapse: collapse; font-size: 13px; min-width: 420px; }
+.avail th { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 4px 6px; text-align: center; }
+.avail th.rowh { text-align: left; padding-left: 0; }
+.avail td { padding: 3px; text-align: center; }
+.slot { position: relative; display: block; width: 40px; height: 32px; }
+.slot input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.slot span { position: absolute; inset: 0; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); }
+.slot input:checked + span { background: var(--accent); border-color: var(--accent); }
+.slot input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.check input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+@media (max-width: 860px) { .rail { position: static; } }
+.rail h2 { font-family: var(--mono); font-weight: 500; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.steps li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; padding-bottom: 16px; position: relative; }
+.steps li:not(:last-child)::before { content: ""; position: absolute; left: 12px; top: 26px; bottom: 2px; width: 1px; background: var(--line); }
+.dot { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.steps li.now .dot { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.steps b { display: block; font-size: 14px; font-weight: 600; }
+.steps small { color: var(--muted); font-size: 13px; }
+.need { border-top: 1px solid var(--line); padding-top: 16px; font-size: 13.5px; color: var(--muted); }
+.need ul { margin: 8px 0 0; padding-left: 18px; }
+
+.done { max-width: 640px; }
+.done h2 { font-family: var(--display); font-weight: 800; font-stretch: 90%; font-size: 34px; margin: 0 0 8px; }
+.done p { color: var(--muted); margin: 0 0 20px; }
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+.summary dl { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 16px; margin: 0; font-size: 14px; }
+@media (max-width: 480px) { .summary dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .summary dd { margin-bottom: 8px; } }
+.summary dt { color: var(--muted); }
+.summary dd { margin: 0; overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: no-preference) { .chip span, .slot span { transition: background .12s, border-color .12s; } }
+</style>
+</head>
+<body>
+<header class="top gutter"><div class="wrap">
+  <a class="brand" href="./"><span class="seal" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="var(--accent-ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vetted</a>
+  <nav class="links"><a href="./#how">How it works</a><a href="apply.html">For coaches</a></nav>
+</div></header>
+
+<main class="wrap gutter">
+<section class="intro">
+    <h1>Coach with Vetted</h1>
+    <p>We match people with screened coaches who train them at home, in their building's gym, or at the park or beach. Tell us what you coach and where, and we'll send you clients who fit.</p>
+  </section>
+
+  <div class="preview-note" id="notConnected" role="note" hidden><span aria-hidden="true">●</span><div><b>Not connected yet.</b> This form isn't linked to a Google Sheet, so submissions won't be saved. Add the web app link to <code>assets/config.js</code>.</div></div>
+
+  <div class="grid">
+    <div id="formView">
+      <form id="app" novalidate>
+        <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <fieldset>
+          <legend><div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">About you</h2></div></legend>
+          <div class="row">
+            <div class="field" data-req><label class="lbl" for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name"><span class="err">Enter your name.</span></div>
+            <div class="field"><label class="lbl" for="ig">Instagram <span class="opt">optional</span></label><input id="ig" name="instagram" type="text" placeholder="@yourhandle"></div>
+          </div>
+          <div class="row">
+            <div class="field" data-req><label class="lbl" for="email">Email</label><input id="email" name="email" type="email" autocomplete="email"><span class="err">Enter an email we can reach you at.</span></div>
+            <div class="field" data-req><label class="lbl" for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"><span class="err">Enter a phone number.</span></div>
+          </div>
+          <div class="field"><label class="lbl" for="gender">How do you identify? <span class="opt">optional</span></label>
+            <select id="gender" name="gender"><option value="">Prefer not to say</option><option>Woman</option><option>Man</option><option>Non-binary</option></select>
+            <span class="hint">Some clients ask for a female or male coach. We only use this to match those requests.</span></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">What you coach</h2></div></legend>
+          <div class="field" data-req data-group="disciplines"><span class="lbl" id="discL">Disciplines</span>
+            <div class="chips" role="group" aria-labelledby="discL">
+              <label class="chip"><input type="checkbox" name="disciplines" value="Boxing"><span>Boxing</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Muay Thai"><span>Muay Thai</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Kickboxing"><span>Kickboxing</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Strength"><span>Strength</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Conditioning / HIIT"><span>Conditioning / HIIT</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Mobility"><span>Mobility</span></label>
+              <label class="chip"><input type="checkbox" name="disciplines" value="Youth"><span>Youth</span></label>
+            </div><span class="err">Pick at least one.</span></div>
+          <div class="field"><span class="lbl" id="lvlL">Client levels you take on</span>
+            <div class="chips" role="group" aria-labelledby="lvlL">
+              <label class="chip"><input type="checkbox" name="levels" value="Beginner"><span>Beginner</span></label>
+              <label class="chip"><input type="checkbox" name="levels" value="Some experience"><span>Some experience</span></label>
+              <label class="chip"><input type="checkbox" name="levels" value="Experienced"><span>Experienced</span></label>
+              <label class="chip"><input type="checkbox" name="levels" value="Competitive"><span>Competitive</span></label>
+            </div></div>
+          <div class="row">
+            <div class="field" data-req><label class="lbl" for="years">Years coaching</label><input id="years" name="years" type="number" min="0" max="60" inputmode="numeric"><span class="err">Enter a number of years.</span></div>
+            <div class="field" data-req><label class="lbl" for="cpr">CPR / First Aid</label>
+              <select id="cpr" name="cpr"><option value="">Choose one</option><option>Current</option><option>Expired</option><option>Never certified</option></select><span class="err">Choose one.</span></div>
+          </div>
+          <div class="field" data-req><label class="lbl" for="certs">Certifications</label><textarea id="certs" name="certs" placeholder="e.g. NASM-CPT, USA Boxing Level 2 Coach"></textarea><span class="err">List your certifications, or write "none".</span></div>
+          <div class="field"><label class="lbl" for="bg">Fight or coaching background <span class="opt">optional</span></label><textarea id="bg" name="background" placeholder="Gyms you've coached at, amateur or pro record, athletes you've trained"></textarea></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Where and when</h2></div></legend>
+          <p class="sec-sub">These are the same things clients tell us, so we can match you with people near you who want your hours.</p>
+          <div class="field" data-req data-group="locations"><span class="lbl" id="locL">Where you'll train clients</span>
+            <div class="chips" role="group" aria-labelledby="locL">
+              <label class="chip"><input type="checkbox" name="locations" value="Client's home"><span>Client's home</span></label>
+              <label class="chip"><input type="checkbox" name="locations" value="Building gym"><span>Client's building gym</span></label>
+              <label class="chip"><input type="checkbox" name="locations" value="Park or beach"><span>Park or beach</span></label>
+            </div><span class="err">Pick at least one.</span></div>
+          <div class="row">
+            <div class="field" data-req><label class="lbl" for="zips">Zip codes or neighborhoods you cover</label><input id="zips" name="areas" type="text" placeholder="92130, 92101, Little Italy"><span class="err">Tell us where you'll travel.</span></div>
+            <div class="field"><label class="lbl" for="radius">Max travel</label>
+              <select id="radius" name="radius"><option>Up to 5 miles</option><option selected>Up to 10 miles</option><option>Up to 20 miles</option><option>Anywhere in the county</option></select></div>
+          </div>
+          <div class="field"><span class="lbl" id="fmtL">Session formats</span>
+            <div class="chips" role="group" aria-labelledby="fmtL">
+              <label class="chip"><input type="checkbox" name="formats" value="1-on-1" checked><span>1-on-1</span></label>
+              <label class="chip"><input type="checkbox" name="formats" value="Small group (2-4)"><span>Small group (2–4)</span></label>
+            </div></div>
+          <div class="field" data-req data-group="avail"><span class="lbl" id="avL">When you're available</span>
+            <span class="hint">Tap every block you can usually take sessions.</span>
+            <div class="avail"><table aria-labelledby="avL"><thead><tr><th class="rowh"></th></tr></thead><tbody></tbody></table></div>
+            <span class="err">Pick at least one time block.</span></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Rates and screening</h2></div></legend>
+          <div class="row">
+            <div class="field"><label class="lbl" for="rate">Your rate for a 1-on-1 hour <span class="opt">USD</span></label><input id="rate" name="rate" type="number" min="0" inputmode="numeric" placeholder="85"></div>
+            <div class="field" data-req><label class="lbl" for="ins">Liability insurance</label>
+              <select id="ins" name="insurance"><option value="">Choose one</option><option>Yes, I have my own</option><option>No, but I can get it</option><option>No</option></select><span class="err">Choose one.</span></div>
+          </div>
+          <div class="field"><label class="lbl" for="gear">Equipment you bring <span class="opt">optional</span></label><input id="gear" name="gear" type="text" placeholder="Mitts, gloves, pads, bands"></div>
+          <div class="field"><label class="lbl" for="heard">How did you hear about Vetted? <span class="opt">optional</span></label>
+            <select id="heard" name="heard"><option value="">Choose one</option><option>Instagram</option><option>A coach I know</option><option>My gym</option><option>Other</option></select></div>
+          <div class="field" data-req data-group="consent">
+            <label class="check"><input type="checkbox" id="consent" name="consent" value="yes"><span>I agree to a background check, and to show my certifications and insurance before I'm approved.</span></label>
+            <span class="err">We need your OK to run the screening.</span></div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn" type="submit" id="submitBtn">Submit application</button>
+          <span class="err-send" id="sendErr" role="alert" hidden></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="done" id="doneView" hidden>
+      <h2>Application received</h2>
+      <p>Thanks. We review every application by hand and will text you within a few days to set up a short call. Keep an eye on your phone.</p>
+      <div class="summary"><dl id="summary"></dl></div>
+      <div class="actions" style="margin-top:18px"><a class="btn outline" href="./">Back to Vetted</a></div>
+    </div>
+
+    <aside class="rail" aria-label="How vetting works">
+      <h2>How vetting works</h2>
+      <ol class="steps">
+        <li class="now"><span class="dot">1</span><div><b>Apply</b><small>This form, about 5 minutes.</small></div></li>
+        <li><span class="dot">2</span><div><b>Intro call</b><small>15 minutes about how you coach.</small></div></li>
+        <li><span class="dot">3</span><div><b>Background and credentials</b><small>Background check, plus your certs, CPR and insurance.</small></div></li>
+        <li><span class="dot">4</span><div><b>Trial session</b><small>Coach one of our team so we see your style.</small></div></li>
+        <li><span class="dot">5</span><div><b>Approved</b><small>You join the roster and start getting matched.</small></div></li>
+      </ol>
+      <div class="need">Have these ready:
+        <ul><li>Certification names and numbers</li><li>CPR / First Aid card</li><li>Insurance details, if you have them</li></ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot gutter"><div class="wrap"><span>© Vetted</span><span>San Diego, CA</span></div></footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/apply.js"></script>
+</body>
+</html>
