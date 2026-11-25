@@ -4,7 +4,7 @@ window.VETTED_CONFIG = {
   // Leave empty until it's set up: the form then shows a "not connected yet" message instead of sending.
   formEndpoint: "",
 
-  // Where the "Find a coach" buttons send clients. Put your current client intake form link here.
+  // Optional: send "Find a coach" buttons somewhere other than Vetted's own request form (request.html).
   clientFormUrl: "",
 
   // Shown to people if a submission fails.

@@ -46,7 +46,7 @@
 <body>
 <header class="top gutter"><div class="wrap">
   <a class="brand" href="./"><span class="seal" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="var(--accent-ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vetted</a>
-  <nav class="links"><a href="#how">How it works</a><a href="apply.html">For coaches</a><a class="btn small" data-client-link href="#">Find a coach</a></nav>
+  <nav class="links"><a href="#how">How it works</a><a href="apply.html">For coaches</a><a class="btn small" data-client-link href="request.html">Find a coach</a></nav>
 </div></header>
 
 <main>
@@ -55,7 +55,7 @@
       <p class="eyebrow">Private training, matched</p>
       <h1 class="display">A coach who's been checked, where you already are.</h1>
       <p class="lede">Tell us what you want to train and when. We match you with a screened coach who comes to your home, your building's gym, or meets you at the park or beach.</p>
-      <div class="cta"><a class="btn" data-client-link href="#">Find a coach</a><a class="btn outline" href="apply.html">Apply to coach</a></div>
+      <div class="cta"><a class="btn" data-client-link href="request.html">Find a coach</a><a class="btn outline" href="apply.html">Apply to coach</a></div>
     </div>
     <div class="card" aria-label="What every Vetted coach clears">
       <h3>Every coach clears</h3>
@@ -104,10 +104,7 @@
 <script>
   document.getElementById("yr").textContent = new Date().getFullYear();
   var url = (window.VETTED_CONFIG || {}).clientFormUrl;
-  document.querySelectorAll("[data-client-link]").forEach(function (a) {
-    if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
-    else { a.href = "#how"; }
-  });
+  if (url) document.querySelectorAll("[data-client-link]").forEach(function (a) { a.href = url; });
 </script>
 </body>
 </html>
