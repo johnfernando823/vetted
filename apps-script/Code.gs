@@ -172,16 +172,20 @@ function sendAlert(d) {
       ];
     } else {
       subject = 'New coach application: ' + d.name;
+      var opt = function (label, v) { return v ? label + ': ' + v : null; };
       lines = [
         'Name: ' + d.name,
         'Phone: ' + d.phone,
         'Email: ' + d.email,
+        opt('Instagram', d.instagram),
         '',
-        'Coaches: ' + d.disciplines + ' · ' + d.years + ' years',
-        'Certifications: ' + d.certs,
-        'Areas: ' + d.areas + ' (' + d.radius + ')',
-        'Rate: ' + (d.rate ? '$' + d.rate + '/hour' : 'not given'),
-        'Insurance: ' + d.insurance
+        opt('Coaches', d.disciplines),
+        opt('Trains at', d.locations),
+        opt('Area', d.areas),
+        opt('Certified', d.certs),
+        opt('Gender', d.gender),
+        '',
+        'Text them to set up the intro call. When they pass screening, set their Status to Approved on the Applications tab.'
       ];
     }
     lines.push('', url);
@@ -316,8 +320,10 @@ function matchCoach(client, coach, miles) {
   else if (places.length) r.good.push('Trains at ' + places.join(', ').toLowerCase());
 
   // Group sessions
-  if (/Small group/.test(String(client['Format'] || '')) && !/Small group/.test(String(coach['Formats'] || ''))) {
-    r.blockers.push('Doesn\'t do small groups');
+  if (/Small group/.test(String(client['Format'] || ''))) {
+    var formats = String(coach['Formats'] || '');
+    if (!formats) r.warn.push('Ask if they coach small groups');
+    else if (!/Small group/.test(formats)) r.blockers.push('Doesn\'t do small groups');
   }
 
   // Distance

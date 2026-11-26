@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="stylesheet" href="assets/forms.css">
+<style>@media (max-width: 860px) { .rail { order: 0; } }</style>
 </head>
 <body>
 <header class="top gutter"><div class="wrap">
@@ -20,7 +21,7 @@
 <main class="wrap gutter">
 <section class="intro">
     <h1>Coach with Vetted</h1>
-    <p>We match people with screened coaches who train them at home, in their building's gym, or at the park or beach. Tell us what you coach and where, and we'll send you clients who fit.</p>
+    <p>We send you private clients who want to train near you, on your hours. Tell us the basics. It takes about 2 minutes.</p>
   </section>
 
   <div class="preview-note" id="notConnected" role="note" hidden><span aria-hidden="true">●</span><div><b>Not connected yet.</b> This form isn't linked to a Google Sheet, so submissions won't be saved. Add the web app link to <code>assets/config.js</code>.</div></div>
@@ -30,23 +31,16 @@
       <form id="app" novalidate>
         <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <fieldset>
-          <legend><div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">About you</h2></div></legend>
           <div class="row">
-            <div class="field" data-req><label class="lbl" for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name"><span class="err">Enter your name.</span></div>
-            <div class="field"><label class="lbl" for="ig">Instagram <span class="opt">optional</span></label><input id="ig" name="instagram" type="text" placeholder="@yourhandle"></div>
+            <div class="field" data-req><label class="lbl" for="name">Name</label><input id="name" name="name" type="text" autocomplete="name"><span class="err">Enter your name.</span></div>
+            <div class="field" data-req data-phone><label class="lbl" for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel"><span class="err">Enter a 10-digit phone number.</span></div>
           </div>
           <div class="row">
             <div class="field" data-req><label class="lbl" for="email">Email</label><input id="email" name="email" type="email" autocomplete="email"><span class="err">Enter an email we can reach you at.</span></div>
-            <div class="field" data-req><label class="lbl" for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"><span class="err">Enter a phone number.</span></div>
+            <div class="field"><label class="lbl" for="ig">Instagram <span class="opt">optional</span></label><input id="ig" name="instagram" type="text" placeholder="@yourhandle"></div>
           </div>
-          <div class="field"><label class="lbl" for="gender">How do you identify? <span class="opt">optional</span></label>
-            <select id="gender" name="gender"><option value="">Prefer not to say</option><option>Woman</option><option>Man</option><option>Non-binary</option></select>
-            <span class="hint">Some clients ask for a female or male coach. We only use this to match those requests.</span></div>
-        </fieldset>
 
-        <fieldset>
-          <legend><div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">What you coach</h2></div></legend>
-          <div class="field" data-req data-group="disciplines"><span class="lbl" id="discL">Disciplines</span>
+          <div class="field" data-req data-group="disciplines"><span class="lbl" id="discL">What do you coach?</span>
             <div class="chips" role="group" aria-labelledby="discL">
               <label class="chip"><input type="checkbox" name="disciplines" value="Boxing"><span>Boxing</span></label>
               <label class="chip"><input type="checkbox" name="disciplines" value="Muay Thai"><span>Muay Thai</span></label>
@@ -56,95 +50,68 @@
               <label class="chip"><input type="checkbox" name="disciplines" value="Mobility"><span>Mobility</span></label>
               <label class="chip"><input type="checkbox" name="disciplines" value="Youth"><span>Youth</span></label>
             </div><span class="err">Pick at least one.</span></div>
-          <div class="field"><span class="lbl" id="lvlL">Client levels you take on</span>
-            <div class="chips" role="group" aria-labelledby="lvlL">
-              <label class="chip"><input type="checkbox" name="levels" value="Beginner"><span>Beginner</span></label>
-              <label class="chip"><input type="checkbox" name="levels" value="Some experience"><span>Some experience</span></label>
-              <label class="chip"><input type="checkbox" name="levels" value="Experienced"><span>Experienced</span></label>
-              <label class="chip"><input type="checkbox" name="levels" value="Competitive"><span>Competitive</span></label>
-            </div></div>
-          <div class="row">
-            <div class="field" data-req><label class="lbl" for="years">Years coaching</label><input id="years" name="years" type="number" min="0" max="60" inputmode="numeric"><span class="err">Enter a number of years.</span></div>
-            <div class="field" data-req><label class="lbl" for="cpr">CPR / First Aid</label>
-              <select id="cpr" name="cpr"><option value="">Choose one</option><option>Current</option><option>Expired</option><option>Never certified</option></select><span class="err">Choose one.</span></div>
-          </div>
-          <div class="field" data-req><label class="lbl" for="certs">Certifications</label><textarea id="certs" name="certs" placeholder="e.g. NASM-CPT, USA Boxing Level 2 Coach"></textarea><span class="err">List your certifications, or write "none".</span></div>
-          <div class="field"><label class="lbl" for="bg">Fight or coaching background <span class="opt">optional</span></label><textarea id="bg" name="background" placeholder="Gyms you've coached at, amateur or pro record, athletes you've trained"></textarea></div>
-        </fieldset>
 
-        <fieldset>
-          <legend><div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Where and when</h2></div></legend>
-          <p class="sec-sub">These are the same things clients tell us, so we can match you with people near you who want your hours.</p>
-          <div class="field" data-req data-group="locations"><span class="lbl" id="locL">Where you'll train clients</span>
+          <div class="field" data-req data-group="locations"><span class="lbl" id="locL">Where can you train clients?</span>
             <div class="chips" role="group" aria-labelledby="locL">
-              <label class="chip"><input type="checkbox" name="locations" value="Client's home"><span>Client's home</span></label>
-              <label class="chip"><input type="checkbox" name="locations" value="Building gym"><span>Client's building gym</span></label>
+              <label class="chip"><input type="checkbox" name="locations" value="Client's home"><span>Their home</span></label>
+              <label class="chip"><input type="checkbox" name="locations" value="Building gym"><span>Their building's gym</span></label>
               <label class="chip"><input type="checkbox" name="locations" value="Park or beach"><span>Park or beach</span></label>
             </div><span class="err">Pick at least one.</span></div>
-          <div class="row">
-            <div class="field" data-req><label class="lbl" for="zips">Zip codes or neighborhoods you cover</label><input id="zips" name="areas" type="text" placeholder="92130, 92101, Little Italy"><span class="err">Tell us where you'll travel.</span></div>
-            <div class="field"><label class="lbl" for="radius">Max travel</label>
-              <select id="radius" name="radius"><option>Up to 5 miles</option><option selected>Up to 10 miles</option><option>Up to 20 miles</option><option>Anywhere in the county</option></select></div>
-          </div>
-          <div class="field"><span class="lbl" id="fmtL">Session formats</span>
-            <div class="chips" role="group" aria-labelledby="fmtL">
-              <label class="chip"><input type="checkbox" name="formats" value="1-on-1" checked><span>1-on-1</span></label>
-              <label class="chip"><input type="checkbox" name="formats" value="Small group (2-4)"><span>Small group (2–4)</span></label>
-            </div></div>
-          <div class="field" data-req data-group="avail"><span class="lbl" id="avL">When you're available</span>
-            <span class="hint">Tap every block you can usually take sessions.</span>
-            <div class="avail"><table aria-labelledby="avL"><thead><tr><th class="rowh"></th></tr></thead><tbody></tbody></table></div>
-            <span class="err">Pick at least one time block.</span></div>
-        </fieldset>
 
-        <fieldset>
-          <legend><div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Rates and screening</h2></div></legend>
+          <div class="field" data-req data-zip><label class="lbl" for="zip">Your zip code</label><input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="92101" style="max-width:160px"><span class="hint">We'll match you with clients within about 10 miles.</span><span class="err">Enter a 5-digit zip code.</span></div>
+
+          <div class="field" data-req data-group="when"><span class="lbl" id="whenL">When can you usually coach?</span>
+            <div class="chips" role="group" aria-labelledby="whenL">
+              <label class="chip"><input type="checkbox" name="when" value="early"><span>Weekday mornings</span></label>
+              <label class="chip"><input type="checkbox" name="when" value="mid"><span>Weekday middays</span></label>
+              <label class="chip"><input type="checkbox" name="when" value="eve"><span>Weekday evenings</span></label>
+              <label class="chip"><input type="checkbox" name="when" value="wknd"><span>Weekends</span></label>
+            </div><span class="err">Pick at least one.</span></div>
+
           <div class="row">
-            <div class="field"><label class="lbl" for="rate">Your rate for a 1-on-1 hour <span class="opt">USD</span></label><input id="rate" name="rate" type="number" min="0" inputmode="numeric" placeholder="85"></div>
-            <div class="field" data-req><label class="lbl" for="ins">Liability insurance</label>
-              <select id="ins" name="insurance"><option value="">Choose one</option><option>Yes, I have my own</option><option>No, but I can get it</option><option>No</option></select><span class="err">Choose one.</span></div>
+            <div class="field"><span class="lbl" id="certL">Certified? <span class="opt">optional</span></span>
+              <div class="chips" role="radiogroup" aria-labelledby="certL">
+                <label class="chip"><input type="radio" name="certs" value="Yes"><span>Yes</span></label>
+                <label class="chip"><input type="radio" name="certs" value="Working on it"><span>Working on it</span></label>
+                <label class="chip"><input type="radio" name="certs" value="No"><span>No</span></label>
+              </div></div>
+            <div class="field"><span class="lbl" id="genL">You are <span class="opt">optional</span></span>
+              <div class="chips" role="radiogroup" aria-labelledby="genL">
+                <label class="chip"><input type="radio" name="gender" value="Woman"><span>Woman</span></label>
+                <label class="chip"><input type="radio" name="gender" value="Man"><span>Man</span></label>
+              </div><span class="hint">Some clients ask for a female or male coach.</span></div>
           </div>
-          <div class="field"><label class="lbl" for="gear">Equipment you bring <span class="opt">optional</span></label><input id="gear" name="gear" type="text" placeholder="Mitts, gloves, pads, bands"></div>
-          <div class="field"><label class="lbl" for="heard">How did you hear about Vetted? <span class="opt">optional</span></label>
-            <select id="heard" name="heard"><option value="">Choose one</option><option>Instagram</option><option>A coach I know</option><option>My gym</option><option>Other</option></select></div>
-          <div class="field" data-req data-group="consent">
-            <label class="check"><input type="checkbox" id="consent" name="consent" value="yes"><span>I agree to a background check, and to show my certifications and insurance before I'm approved.</span></label>
-            <span class="err">We need your OK to run the screening.</span></div>
         </fieldset>
 
         <div class="actions">
-          <button class="btn" type="submit" id="submitBtn">Submit application</button>
+          <button class="btn" type="submit" id="submitBtn">Apply</button>
           <span class="err-send" id="sendErr" role="alert" hidden></span>
         </div>
       </form>
     </div>
 
     <div class="done" id="doneView" hidden>
-      <h2>Application received</h2>
-      <p>Thanks. We review every application by hand and will text you within a few days to set up a short call. Keep an eye on your phone.</p>
+      <h2>Thanks, you're in the queue</h2>
+      <p>We'll text you in the next few days to set up a quick call. Keep an eye on your phone.</p>
       <div class="summary"><dl id="summary"></dl></div>
       <div class="actions" style="margin-top:18px"><a class="btn outline" href="./">Back to Vetted</a></div>
     </div>
 
-    <aside class="rail" aria-label="How vetting works">
-      <h2>How vetting works</h2>
+    <aside class="rail" aria-label="How it works for coaches">
+      <h2>What happens next</h2>
       <ol class="steps">
-        <li class="now"><span class="dot">1</span><div><b>Apply</b><small>This form, about 5 minutes.</small></div></li>
-        <li><span class="dot">2</span><div><b>Intro call</b><small>15 minutes about how you coach.</small></div></li>
-        <li><span class="dot">3</span><div><b>Background and credentials</b><small>Background check, plus your certs, CPR and insurance.</small></div></li>
-        <li><span class="dot">4</span><div><b>Trial session</b><small>Coach one of our team so we see your style.</small></div></li>
-        <li><span class="dot">5</span><div><b>Approved</b><small>You join the roster and start getting matched.</small></div></li>
+        <li class="now"><span class="dot">1</span><div><b>Apply</b><small>This form, about 2 minutes.</small></div></li>
+        <li><span class="dot">2</span><div><b>Quick call</b><small>15 minutes on how you coach, your rates, certs and insurance.</small></div></li>
+        <li><span class="dot">3</span><div><b>Background check</b><small>Every Vetted coach clears one before meeting clients.</small></div></li>
+        <li><span class="dot">4</span><div><b>Start getting clients</b><small>We match you with people near you who want your hours.</small></div></li>
       </ol>
-      <div class="need">Have these ready:
-        <ul><li>Certification names and numbers</li><li>CPR / First Aid card</li><li>Insurance details, if you have them</li></ul>
-      </div>
     </aside>
   </div>
 </main>
 
 <footer class="foot gutter"><div class="wrap"><span>© Vetted</span><span>San Diego, CA</span></div></footer>
 
-<script src="assets/config.js?v=2"></script>
-<script src="assets/apply.js?v=2"></script>
+<script src="assets/config.js?v=3"></script>
+<script src="assets/apply.js?v=3"></script>
 </body>
 </html>
