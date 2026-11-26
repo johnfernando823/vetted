@@ -40,3 +40,14 @@ Each application becomes a row with status **New**, plus empty columns you fill 
 
 If you change `Code.gs` later, go to **Deploy → Manage deployments → Edit → New version** so the live form uses the new code.
 
+
+### 3. Turn on alerts and coach matching
+After pasting a new version of `Code.gs`: **Save**, then **Deploy → Manage deployments → pencil (Edit) → Version: New version → Deploy**. The web app URL stays the same.
+
+Then reload the Google Sheet. A **Vetted** menu appears at the top:
+
+- **Set up sheet**: run once. Adds status dropdowns, a **Coach Roster** tab (every coach whose Status is *Approved*), and a coach picker in *Matched coach*.
+- **Suggest coaches for selected client**: click a client's row on *Client Requests*, then run it. Approved coaches are ranked by coach preference, where they train, distance from the client's zip, shared times, what they coach, and client level. **Assign** fills in *Matched coach* and sets Status to *Matched*.
+- **Send a test alert email**: checks that alerts reach you.
+
+Every new client request or coach application emails the sheet's owner. To email someone else too, set `ALERT_EMAILS` at the top of `Code.gs`.
